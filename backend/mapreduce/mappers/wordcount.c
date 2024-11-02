@@ -11,14 +11,20 @@
 
 void replace_chars(char *str) {
     while (*str) {
-        if (*str == ':')
-            *str = ';';
-        // prevent newline from messing up with strtok()
-        if (*str == '\n')
+        // Replace specific special characters with space before handling ':'
+        if (*str == ')' || *str == '(' || *str == '|' || *str == '&' || *str == '!' ||
+            *str == '@' || *str == '#' || *str == '^' || *str == '*' || *str == '-' ||
+            *str == '+' || *str == '~' || *str == '"' || *str == ';' || *str == '.' ||
+            *str == ',' || *str == '?' || *str == '/' || *str == '_' || *str == '[' ||
+	    *str == ']' || *str == ':' ) {
             *str = ' ';
-	if (*str == ')' || *str == '(' || *str == '|' || *str == '&' || *str == '!' || *str == '@' || *str == '#' || *str == '^' || *str == '*' || *str == '-' || *str == '+' || *str == '~' || *str == '"' || *str == ';' || *str == '.' || *str == ',' || *str == '?' || *str == '/')
-	    *str = ' ';
-
+        } else if (*str == ':') {
+            *str = ';';
+        } else if (*str == '\n') {
+            *str = ' ';
+        } else if (*str >= 'A' && *str <= 'Z') {
+            *str = *str + ('a' - 'A');
+        }
         str++;
     }
 }
