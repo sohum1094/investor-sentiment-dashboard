@@ -1,0 +1,16 @@
+version: '3'
+services:
+#frontend needs to set up their dockerfile
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  backend:
+    build: ./backend
+    command: ["python", "app.py"]  # Make sure this command runs the server
+    ports:
+      - "8000:8000"       #changed this to 8000 because macos airplay receiver uses 5000
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
